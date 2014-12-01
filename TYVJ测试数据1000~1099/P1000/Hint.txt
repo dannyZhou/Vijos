@@ -1,0 +1,19 @@
+请千万注意，Tyvj所有题目不需要加文件！
+[b]Free Pascal Code:[/b]
+-------------------
+var a,b:longint;
+begin
+  readln(a,b);
+  writeln(a+b);
+end.
+
+[b]C++ Code:[/b]
+-------------------
+#include <iostream>
+using namespace std;
+int main(){
+  int a,b;
+  cin>>a>>b;
+  cout<<a+b<<endl;
+  return 0;
+}

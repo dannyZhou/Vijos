@@ -1,0 +1,10 @@
+1096.exe <input1.txt >output1.txt
+1096.exe <input2.txt >output2.txt
+1096.exe <input3.txt >output3.txt
+1096.exe <input4.txt >output4.txt
+1096.exe <input5.txt >output5.txt
+1096.exe <input6.txt >output6.txt
+1096.exe <input7.txt >output7.txt
+1096.exe <input8.txt >output8.txt
+1096.exe <input9.txt >output9.txt
+1096.exe <input10.txt >output10.txt

@@ -1,0 +1,6 @@
+输出样例1
+abcsttuuvvw1234556677889s-4zz
+输出样例2
+aCCCBBBd-d
+输出样例3
+dijkstra2************6

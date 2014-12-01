@@ -1,0 +1,2 @@
+Nะกำฺ5000
+for each num <=maxint

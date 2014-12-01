@@ -1,0 +1,7 @@
+输出样例1
+Lucky Word
+2
+
+输出样例2
+No Answer
+0
