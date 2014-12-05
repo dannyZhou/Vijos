@@ -75,7 +75,7 @@ public class Main {
 		}
 		// 固定 i
 		int tmpLimit = 0;
-		
+
 		int i = endSpan + 1;
 		while (i <= n + 10) {
 
@@ -121,16 +121,45 @@ public class Main {
 			process[0] = 0;
 
 			// 计算 这个石子 和下一个石子的 距离
-//
-//			if (stoneNums != 0
-//					&& stoneLocate[stoneNums] - stoneLocate[stoneNums - 1] > 2520) {
-//				i = i + 2520;
-//				 stoneLocate[stoneNums - 1] +=2520;
-//			}
-			int tmp;
-			if (stoneNums !=0 && ( stoneLocate[stoneNums] - i )>2520 ) {
-				i = i+ 2520;
+			//
+			// if (stoneNums != 0
+			// && stoneLocate[stoneNums] - stoneLocate[stoneNums - 1] > 2520) {
+			// i = i + 2520;
+			// stoneLocate[stoneNums - 1] +=2520;
+			// }
+			int tmp = stoneLocate[stoneNums] - i;
+
+			if (tmp > 252000000) {
+				i = i + 252000000;
+				i++;
+				continue;
 			}
+			if (tmp > 25200000) {
+				i = i + 25200000;
+				i++;
+				continue;
+			}
+			if (tmp > 2520000) {
+				i = i + 2520000;
+				i++;
+				continue;
+			}
+			if (tmp > 252000) {
+				i = i + 252000;
+				i++;
+				continue;
+			}
+			if (tmp > 2520) {
+				i = i + 2520;
+				i++;
+				continue;
+			}
+			if (tmp > 2520) {
+				i = i + 2520;
+				i++;
+				continue;
+			}
+
 			i++;
 		}
 		tmpNumber = Integer.MAX_VALUE;
