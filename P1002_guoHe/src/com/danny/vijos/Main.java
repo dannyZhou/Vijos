@@ -17,6 +17,8 @@ public class Main {
 
 		int tmpNumber = 0;
 
+		int stoneTotalNum = 0;
+
 		// 这里 的 0 是用来添加最新的, 这里的 12 是 没有用, 为了防止 溢出
 		int process[] = { Integer.MAX_VALUE, Integer.MAX_VALUE,
 				Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE,
@@ -48,31 +50,16 @@ public class Main {
 
 		beginSpan = Integer.parseInt(tmpStrings[0]);
 		endSpan = Integer.parseInt(tmpStrings[1]);
-		tmpNumber = Integer.parseInt(tmpStrings[2]);
+		stoneTotalNum = Integer.parseInt(tmpStrings[2]);
 
 		tmplineString = scanner.nextLine();
 
 		tmpStoneLocate = tmplineString.split(" ");
 
-		for (int i = 0; i < tmpStoneLocate.length; i++) {
+		for (int i = 0; i < stoneTotalNum; i++) {
 			stoneLocate[i] = Integer.parseInt(tmpStoneLocate[i]);
 		}
 		Arrays.sort(stoneLocate, 0, tmpStoneLocate.length);
-
-		for (int i = endSpan - beginSpan + 1; i >= 1; i--) {
-
-			// 看看当前 有没有石头
-			if (stoneLocate[stoneNums] == endSpan + 1 - i) {
-				process[i] = 1;
-				stoneNums++;
-				if (stoneNums == tmpNumber) {
-					flag = false;
-				}
-			} else {
-				process[i] = 0;
-			}
-
-		}
 
 		// 如果说 endSpan == beginSpan
 		if (endSpan == beginSpan) {
@@ -86,11 +73,37 @@ public class Main {
 
 		} else {
 
+			for (int i = 1; i < stoneTotalNum; i++) {
+				if (stoneLocate[i] - stoneLocate[i - 1] > 100) {
+
+					int tmp = stoneLocate[i] - stoneLocate[i - 1] - 100;
+
+					for (int j = i; j < stoneTotalNum; j++) {
+						stoneLocate[j] = stoneLocate[j] - tmp;
+					}
+				}
+			}
+
+			for (int i = endSpan - beginSpan + 1; i >= 1; i--) {
+
+				// 看看当前 有没有石头
+				if (stoneLocate[stoneNums] == endSpan + 1 - i) {
+					process[i] = 1;
+					stoneNums++;
+					if (stoneNums == tmpNumber) {
+						flag = false;
+					}
+				} else {
+					process[i] = 0;
+				}
+
+			}
+
 			// 固定 i
 			int tmpLimit = 0;
 
 			int i = endSpan + 1;
-			while (i <= n + 10) {
+			while (i <= stoneLocate[stoneTotalNum - 1] + 100) {
 
 				if (flag) {
 
@@ -151,16 +164,16 @@ public class Main {
 				 * i = i + 2520; i++; continue; } if (tmp > 2520) { i = i +
 				 * 2520; i++; continue; }
 				 */
-				int tmp = stoneLocate[stoneNums] - i;
-				if (tmp > 100) {
-
-					String tmpString = (new Integer(tmp)).toString();
-					tmpString = tmpString.substring(0,tmpString.length()-2);
-					tmpString = tmpString+"00";
-					
-					i = i + Integer.parseInt(tmpString);
-
-				}
+				// int tmp = stoneLocate[stoneNums] - i;
+				// if (tmp > 100) {
+				//
+				// String tmpString = (new Integer(tmp)).toString();
+				// tmpString = tmpString.substring(0, tmpString.length() - 2);
+				// tmpString = tmpString + "00";
+				//
+				// i = i + Integer.parseInt(tmpString);
+				//
+				// }
 
 				i++;
 			}
