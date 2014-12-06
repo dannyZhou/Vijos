@@ -73,102 +73,105 @@ public class Main {
 			}
 
 		}
-		// 固定 i
-		int tmpLimit = 0;
 
-		int i = endSpan + 1;
-		while (i <= n + 10) {
+		// 如果说 endSpan == beginSpan
+		if (endSpan == beginSpan) {
+			tmpNumber = 0;
+			for (int i = 0; i < stoneLocate.length; i++) {
+				if (stoneLocate[i] != 0 && stoneLocate[i] % beginSpan == 0) {
+					tmpNumber++;
+				}
+			}
+			System.out.println(tmpNumber);
 
-			if (flag) {
+		} else {
 
-				// 看看当前 有没有石头
-				if (stoneLocate[stoneNums] == i) {
-					process[0] = 1;
-					stoneNums++;
-					if (stoneNums == tmpNumber) {
-						flag = false;
+			// 固定 i
+			int tmpLimit = 0;
+
+			int i = endSpan + 1;
+			while (i <= n + 10) {
+
+				if (flag) {
+
+					// 看看当前 有没有石头
+					if (stoneLocate[stoneNums] == i) {
+						process[0] = 1;
+						stoneNums++;
+						if (stoneNums == tmpNumber) {
+							flag = false;
+						}
+					} else {
+						process[0] = 0;
 					}
+
 				} else {
 					process[0] = 0;
 				}
 
-			} else {
+				int tmpInt = Integer.MAX_VALUE;
+
+				// 取最小 区间内
+				for (int j = beginSpan; j <= endSpan; j++) {
+					if (tmpInt > process[j]) {
+						tmpInt = process[j];
+					}
+				}
+
+				if (tmpInt == Integer.MAX_VALUE) {
+
+					process[0] = Integer.MAX_VALUE;
+
+				} else {
+
+					process[0] += tmpInt;
+
+				}
+				// 所有元素后移一位
+				for (int j = 10; j >= 0; j--) {
+					process[j + 1] = process[j];
+				}
 				process[0] = 0;
+
+				// 计算 这个石子 和下一个石子的 距离
+				//
+				// if (stoneNums != 0
+				// && stoneLocate[stoneNums] - stoneLocate[stoneNums - 1] >
+				// 2520) {
+				// i = i + 2520;
+				// stoneLocate[stoneNums - 1] +=2520;
+				// }
+				/*
+				 * int tmp = stoneLocate[stoneNums] - i;
+				 * 
+				 * if (tmp > 252000000) { i = i + 252000000; i++; continue; } if
+				 * (tmp > 25200000) { i = i + 25200000; i++; continue; } if (tmp
+				 * > 2520000) { i = i + 2520000; i++; continue; } if (tmp >
+				 * 252000) { i = i + 252000; i++; continue; } if (tmp > 2520) {
+				 * i = i + 2520; i++; continue; } if (tmp > 2520) { i = i +
+				 * 2520; i++; continue; }
+				 */
+				int tmp = stoneLocate[stoneNums] - i;
+				if (tmp > 100) {
+
+					String tmpString = (new Integer(tmp)).toString();
+					tmpString = tmpString.substring(0,tmpString.length()-2);
+					tmpString = tmpString+"00";
+					
+					i = i + Integer.parseInt(tmpString);
+
+				}
+
+				i++;
 			}
-
-			int tmpInt = Integer.MAX_VALUE;
-
-			// 取最小 区间内
-			for (int j = beginSpan; j <= endSpan; j++) {
-				if (tmpInt > process[j]) {
-					tmpInt = process[j];
+			tmpNumber = Integer.MAX_VALUE;
+			for (i = 1; i <= endSpan; i++) {
+				if (process[i] < tmpNumber && process[i] != 0) {
+					tmpNumber = process[i];
 				}
 			}
 
-			if (tmpInt == Integer.MAX_VALUE) {
-
-				process[0] = Integer.MAX_VALUE;
-
-			} else {
-
-				process[0] += tmpInt;
-
-			}
-			// 所有元素后移一位
-			for (int j = 10; j >= 0; j--) {
-				process[j + 1] = process[j];
-			}
-			process[0] = 0;
-
-			// 计算 这个石子 和下一个石子的 距离
-			//
-			// if (stoneNums != 0
-			// && stoneLocate[stoneNums] - stoneLocate[stoneNums - 1] > 2520) {
-			// i = i + 2520;
-			// stoneLocate[stoneNums - 1] +=2520;
-			// }
-			int tmp = stoneLocate[stoneNums] - i;
-
-			if (tmp > 252000000) {
-				i = i + 252000000;
-				i++;
-				continue;
-			}
-			if (tmp > 25200000) {
-				i = i + 25200000;
-				i++;
-				continue;
-			}
-			if (tmp > 2520000) {
-				i = i + 2520000;
-				i++;
-				continue;
-			}
-			if (tmp > 252000) {
-				i = i + 252000;
-				i++;
-				continue;
-			}
-			if (tmp > 2520) {
-				i = i + 2520;
-				i++;
-				continue;
-			}
-			if (tmp > 2520) {
-				i = i + 2520;
-				i++;
-				continue;
-			}
-
-			i++;
+			System.out.println(tmpNumber);
 		}
-		tmpNumber = Integer.MAX_VALUE;
-		for (i = 1; i <= endSpan; i++) {
-			if (process[i] < tmpNumber && process[i] != 0) {
-				tmpNumber = process[i];
-			}
-		}
-
-		System.out.println(tmpNumber);
 	}
 }
